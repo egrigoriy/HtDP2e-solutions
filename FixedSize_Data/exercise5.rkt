@@ -11,10 +11,14 @@
 (define wheel (circle 10 "solid" "black"))
 (define body (overlay/xy (rectangle 100 25 "solid" "red")
                          25 -15
-                         (rectangle 50 15 "solid" "blue")))
+                         (rectangle 50 15 "solid" "red")))
+
 (define automobile (overlay/xy (overlay/xy body
                                            5 30
                                            wheel)
                                75 30
                                wheel))
-  
+
+(define factor 1)
+
+(scale factor automobile)
