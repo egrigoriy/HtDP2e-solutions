@@ -15,9 +15,9 @@
 
 ;---
 (define (attendees ticket-price)
-  (- AVERAGE_ATTENDEES (* (/ (- ticket-price AVERAGE_PRICE)
-               DELTA_PRICE)
-            DELTA_ATTENDEES)))
+  (- AVERAGE_ATTENDEES (* (/ DELTA_ATTENDEES
+                             DELTA_PRICE)
+                          (- ticket-price AVERAGE_PRICE))))
 
 (check-expect (attendees 5) 120)
 (check-expect (attendees 5.1) 105)
