@@ -4,15 +4,26 @@
 ; The owner of a monopolistic movie theater in a small town has complete freedom in setting ticket prices.
 ; The owner would like to know the exact relationship between profit and ticket price so that he can maximize his profit.
 
+;Exercise 27. Collect all definitions in DrRacket’s definitions area and change them so that all magic numbers are refactored into constant definitions.
+
+(define AVERAGE_PRICE 5)
+(define AVERAGE_ATTENDEES 120)
+(define DELTA_PRICE 0.1)
+(define DELTA_ATTENDEES 15)
+(define COST_FIXED_PART 180)
+(define COST_PER_ATTENDEE 0.04)
+
+;---
 (define (attendees ticket-price)
-  (- 120 (* (/ (- ticket-price 5)
-               0.1)
-            15)))
+  (- AVERAGE_ATTENDEES (* (/ (- ticket-price AVERAGE_PRICE)
+               DELTA_PRICE)
+            DELTA_ATTENDEES)))
 
 (check-expect (attendees 5) 120)
 (check-expect (attendees 5.1) 105)
 (check-expect (attendees 4.9) 135)
 
+;---
 (define (revenue price)
   (* (attendees price)
      price))
@@ -21,15 +32,17 @@
 (check-expect (revenue 5.1) 535.5)
 (check-expect (revenue 4.9) 661.5)
 
+;---
 (define (cost price)
-  (+ 180
-     (* 0.04
+  (+ COST_FIXED_PART
+     (* COST_PER_ATTENDEE
         (attendees price))))
 
 (check-expect (cost 5) 184.8)
 (check-expect (cost 5.1) 184.2)
 (check-expect (cost 4.9) 185.4)
 
+;---
 (define (profit price)
   (- (revenue price)
      (cost price)))
