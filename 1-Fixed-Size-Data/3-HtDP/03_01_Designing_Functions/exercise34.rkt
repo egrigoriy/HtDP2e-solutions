@@ -8,3 +8,5 @@
 ; given: "hello", expect "h"
 (define (string-first a-string)
   (substring a-string 0 1))
+
+(check-expect (string-first "hello") "h")
